@@ -7,13 +7,13 @@ import DestinationPage from "./Pages/UserPages/DestinationPage";
 import DestinationDetailPage from "./Pages/UserPages/DestinationDetailPage";
 import ErrorPage from "./Pages/ErrorPage";
 import GSignupPage from "./Pages/GuidePages/GSignupPage";
-import GHomePage from "./Pages/GuidePages/GHomePage";
+
 
 import GRequestPage from "./Pages/GuidePages/GRequestPage";
 import GuideDetailPage from "./Pages/UserPages/GuideDetailPage";
-import ProfilePage from "./Pages/UserPages/ProfilePage";
+
 import UserRequestPage from "./Pages/UserPages/UserRequestPage";
-// import Login from './Components/UserComponents/Login/Login';
+
 import { Toaster } from "react-hot-toast";
 import GLogin from "./Components/GuideComponents/GLogin/GLogin";
 import {
@@ -129,7 +129,7 @@ function App() {
           <Route path="/guide_signup" element={<GSignupPage />} />
           <Route path="/guide_login" element={<GLogin />} />
 
-          {/* <Route element={<RequireLoginGuide />}> */}
+          <Route element={<RequireLoginGuide />}>
             {/* <Route path='/guide_home' element={<GHomePage/>}/> */}
             <Route
               path="/guide_request"
@@ -163,7 +163,7 @@ function App() {
                 </AuthorizeGuide>
               }
             />
-          {/* </Route> */}
+          </Route>
         </Routes>
       </Router>
     </div>

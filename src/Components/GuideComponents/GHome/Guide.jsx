@@ -8,12 +8,29 @@ import { useNavigate } from 'react-router-dom'
 import GDetails from './GDetails'
 import axios from '../../../utilis/axios'
 import { guideProfileGet } from '../../../utilis/constants'
+import swal from 'sweetalert'
 const Guide = () => {
     const navigate = useNavigate()
     const handleLogout=()=>{
-        Cookies.remove('guide_id')
-        Cookies.remove('guide_jwt')
-        navigate('/guide_login')
+
+
+        swal({
+            title: "Are you sure?",
+            // text: "Once deleted, you will not be able to recover this item!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                Cookies.remove('guide_id')
+                Cookies.remove('guide_jwt')
+                navigate('/guide_login')
+            } else {
+                swal("Item deletion has been cancelled!");
+            }
+        });
+        
     }
     const guide_id=Cookies.get('guide_id')
     const [guide,setGuide]=useState([])

@@ -200,7 +200,7 @@ const GHistory = () => {
                         }}
                       >
                         <button
-                          className=""
+                          className="bg-danger border-none"
                           onClick={() => {
                             setHistory((prevHistory) => {
                               const newHistory = [...prevHistory];
@@ -209,7 +209,7 @@ const GHistory = () => {
                             });
                           }}
                         >
-                          Close Modal
+                          X
                         </button>
                         <div class="d-flex justify-content-center align-items-center container-otp">
                           <div class="card-otp py-5 px-3">

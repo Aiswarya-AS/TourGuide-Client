@@ -6,17 +6,34 @@ import { VscChromeClose } from "react-icons/vsc";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
   const navigate = useNavigate();
   const token=Cookies.get('jwt')
   const handleLogout=()=>{
-      const token=Cookies.get('jwt')
-      if (token){
-        Cookies.remove('jwt')
-        Cookies.remove('user_id')
-        navigate('/login')
+    
+    swal({
+      title: "Are you sure?",
+      // text: "Once deleted, you will not be able to recover this item!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+  })
+  .then((willDelete) => {
+      if (willDelete) {
+        const token=Cookies.get('jwt')
+        if (token){
+          Cookies.remove('jwt')
+          Cookies.remove('user_id')
+          navigate('/login')
+        }
+      } else {
+          swal("Item deletion has been cancelled!");
       }
+  });
+  
+      
   }
 
   return (
@@ -26,7 +43,8 @@ export default function Navbar() {
         <div className="brand">
           <div className="container">
             <img src={logo} alt="" />
-            Voyago
+            
+            <Link to='/' className="text-decoration-none">TourWhiz</Link>
           </div>
           <div className="toggle">
             {navbarState ? (
@@ -41,18 +59,18 @@ export default function Navbar() {
           <li>
            <Link to='/'>Home</Link>
           </li>
-          <li>
+          {/* <li>
             <a href="#services">About</a>
-          </li>
+          </li> */}
           <li>
            
             <Link to="/userprofile">
               <a href="#" >Profile</a>
               </Link>
           </li>
-          <li>
+          {/* <li>
             <a href="#testimonials">Testimonials</a>
-          </li>
+          </li> */}
         </ul>
        {token?  <button onClick={handleLogout}>Logout</button>:<button onClick={()=>{navigate('/login')}}>Login</button>}
         {/* <button onClick={handleLogout}>Logout</button> */}

@@ -96,18 +96,7 @@ const UserProfile = () => {
                     >
                       Booking History
                     </button>
-                    <button
-                      class="nav-link"
-                      id="v-pills-settings-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#v-pills-settings"
-                      type="button"
-                      role="tab"
-                      aria-controls="v-pills-settings"
-                      aria-selected="false"
-                    >
-                      Your Blogs
-                    </button>
+                    
                   </div>
                 </div>
               </div>

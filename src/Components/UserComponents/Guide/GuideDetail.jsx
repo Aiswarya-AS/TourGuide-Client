@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from '../../../utilis/axios'
+import axios from "../../../utilis/axios";
 import Navbar from "../Home/Navbar";
 import { BiLocationPlus } from "react-icons/bi";
 import { GrLanguage } from "react-icons/gr";
@@ -9,8 +9,16 @@ import "./rating.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Calendar from "react-calendar";
-import { addCommentPost, commentsGet, guideGet, locationsGet, requests } from "../../../utilis/constants";
-// import "react-calendar/dist/Calendar.css";
+import 'react-calendar/dist/Calendar.css';
+import {
+  addCommentPost,
+  availableDates,
+  commentsGet,
+  guideGet,
+  locationsGet,
+  requests,
+} from "../../../utilis/constants";
+
 const GuideDetail = () => {
   const {
     register,
@@ -22,13 +30,9 @@ const GuideDetail = () => {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .post(
-        `${addCommentPost}/${guide_id}/${user_id}`,
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      .post(`${addCommentPost}/${guide_id}/${user_id}`, data, {
+        headers: { "Content-Type": "application/json" },
+      })
       .then((res) => {
         toast.success("Thankyou for your feedback...");
         get_comments();
@@ -51,12 +55,32 @@ const GuideDetail = () => {
   const guide_price = guide.pricing;
   const guide_country = guide.country;
   const guide_state = guide.state;
-  const availableDates = ["2023-05-01", "2023-05-09", "2023-05-10"];
   const [showCalendar, setShowCalendar] = useState(false);
   const [avg, setAvg] = useState("");
-  const isDateAvailable = (date) => {
-    return availableDates.includes(date.toISOString().split("T")[0]);
+
+  const [availabilityData, setAvailabilityData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  // useEffect(() => {
+  //   axios.get(`${availableDates}/${guide_id}`).then((res) => {
+  //     setAvailabilityData(res.data);
+  //   });
+  // }, []);
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
   };
+  const tileClassName = ({ date }) => {
+    const availability = availabilityData.find((item) => {
+      return item.date === formatDate(date) && item.isAvailable;
+    });
+
+    return availability ? "available-date" : "unavailable-date";
+  };
+
+  const formatDate = (date) => {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
+
   const handleCalendarClick = () => {
     setShowCalendar(!showCalendar);
   };
@@ -65,53 +89,32 @@ const GuideDetail = () => {
   const handleShowMore = () => {
     setVisibleItems(comments.length);
   };
-  const tileClassName = ({ date }) => {
-    if (isDateAvailable(date)) {
-      return "available";
-    }
-    return "unavailable";
-  };
 
   useEffect(() => {
-    axios
-      .get(`${guideGet}/${parms.id}`)
-      .then((res) => {
-        setGuide(res.data);
-      });
+    axios.get(`${guideGet}/${parms.id}`).then((res) => {
+      setGuide(res.data);
+      console.log(res.data);
+    });
   }, [parms]);
-
 
   useEffect(() => {
     get_comments();
   }, []);
 
   const get_comments = () => {
-    axios
-      .get(`${commentsGet}/${guide_id}`)
-      .then((res) => {
-        setComment(res.data.comments);
-        setAvg(res.data.avg);
-      });
+    axios.get(`${commentsGet}/${guide_id}`).then((res) => {
+      setComment(res.data.comments);
+      setAvg(res.data.avg);
+    });
   };
 
   useEffect(() => {
     axios.get(locationsGet).then((res) => {
-      console.log(res.data,'locationsssss');
+      
       setLocation(res.data);
     });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       "http://127.0.0.1:8000/user/request_exists",
-  //       { guide_id: guide_id, user_id: user_id },
-  //       { headers: { "Content-Type": "application/json" } }
-  //     )
-  //     .then((res) => {
-  //       setRequest(res.data);
-  //     });
-  // }, []);
   const handleSubmitc = (e) => {
     e.preventDefault();
     const data = JSON.stringify({
@@ -188,24 +191,28 @@ const GuideDetail = () => {
             </ul>
             <div class="card-body text-center">
               <div>
-                <button
+                {/* <button
                   className="btn btn-info mt-3"
                   onClick={handleCalendarClick}
                 >
                   Check Availability
-                </button>
+                </button> */}
 
-                {showCalendar && <Calendar tileClassName={tileClassName} />}
+                {showCalendar && (
+                  <Calendar
+                    onChange={handleDateSelect}
+                    tileClassName={tileClassName}
+                    value={selectedDate}
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
         <div className="" style={{ width: "60rem", height: "20rem" }}>
           <div class="card " style={{ border: "none" }}>
-            <video width="850" height="500" controls>
-              <source src={guide.video} type="video/mp4" />
-              <source src="movie.ogg" type="video/ogg" />
-              Your browser does not support the video tag.
+            <video width="850" height="500" src={guide.video} controls>
+      
             </video>
             <div class="card-body">
               <h5 class="card-title">Haii threre.. Its me {guide.firstname}</h5>
@@ -224,7 +231,7 @@ const GuideDetail = () => {
             <div class="card" style={{ width: "24rem" }}>
               <ul class="list-group list-group-flush">
                 <p className="mx-3">
-                  RS:<b>200</b>/per Person
+                  RS:<b>{guide.pricing}</b>/per Person
                 </p>
                 <input
                   type="date"
@@ -314,11 +321,10 @@ const GuideDetail = () => {
                 </div>
               </div>
             </form>
-            
+
             {comments.slice(0, visibleItems).map((c) => (
               <div class="mt-2">
                 <div class="d-flex flex-row p-3">
-                  
                   <div class="w-100">
                     <div class="d-flex justify-content-between align-items-center mx-2">
                       <div class="d-flex flex-row align-items-center">
@@ -338,15 +344,14 @@ const GuideDetail = () => {
           </div>
 
           {visibleItems < comments.length && (
-                    <a
-                      onClick={handleShowMore}
-                      href="#"
-                      class="text-dark text-decoration-none d-flex justify-content-center m-5"
-                    >
-                      Show more <b class="caret"></b>
-                    </a>
-                  )}
-    
+            <a
+              onClick={handleShowMore}
+              href="#"
+              class="text-dark text-decoration-none d-flex justify-content-center m-5"
+            >
+              Show more <b class="caret"></b>
+            </a>
+          )}
         </div>
       </div>
     </>

@@ -80,7 +80,7 @@ const BookingHistory = (props) => {
                   {h.status === "Cancelled" ? (
                     <p className="text-danger text-capitalize">Cancelled</p>
                   ) : (
-                    <p className="text-info text-capitalize">{h.journey_status}ed</p>
+                    <p className="text-info text-capitalize">{h.journey_status}</p>
                   )}
                 </div>
              
