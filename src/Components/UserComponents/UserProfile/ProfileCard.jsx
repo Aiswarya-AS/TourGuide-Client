@@ -26,10 +26,11 @@ const ProfileCard = () => {
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
               <img
-                src={`http://127.0.0.1:8000/${user.profile_pic}`}
+                src={`https://res.cloudinary.com/dmysmwucj/${user.profile_pic}`}
                 alt="Admin"
                 class="rounded-circle"
-                width="150"
+                width="150" 
+                  
               />
               <div class="mt-3">
                 <h4>{user.username}</h4>

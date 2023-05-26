@@ -7,7 +7,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 const Signup = () => {
-  const {register,handleSubmit,formState: { errors },watch} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
 
   const navigate = useNavigate();
   const handleSignup = (data) => {
@@ -18,16 +23,19 @@ const Signup = () => {
       })
       .then((res) => {
         if (res.data.status === "true") {
-          console.log("singup ayada kuttaa...");
+          
           navigate("/login");
         } else {
-          console.log("Illa mwonuee ni valarinittaa");
-          toast.error(res.data.status)
+          
+          toast.error(res.data.status);
         }
       });
   };
   const validatePasswordMatch = (value) => {
-    const { password, confirmPassword } = watch(["password", "confirmPassword"]);
+    const { password, confirmPassword } = watch([
+      "password",
+      "confirmPassword",
+    ]);
     return password === confirmPassword || "Passwords must match";
   };
   return (
@@ -42,12 +50,16 @@ const Signup = () => {
             <div class="row gx-lg-5 align-items-center">
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <h1 class="my-5 display-3 fw-bold ls-tight">
-                Welcome to <br />
-            <span class="text-primary">VOYAGO Sign Up</span>
+                  Welcome to <br />
+                  <span class="text-primary">TourWhiz  Sign Up</span>
                 </h1>
                 <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
-                Please enter your credentials to sign in and to create your travel account.
+                  Please enter your credentials to sign in and to create your
+                  travel account.
                 </p>
+                <div>
+                  <Link to="/"> Back to Home</Link>
+                </div>
               </div>
 
               <div class="col-lg-6 mb-5 mb-lg-0">
@@ -143,8 +155,6 @@ const Signup = () => {
                         )}
                       </div>
 
-
-
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example4">
                           Phone
@@ -172,8 +182,6 @@ const Signup = () => {
                         )}
                       </div>
 
-
-
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
@@ -182,7 +190,6 @@ const Signup = () => {
                             </label>
                             <input
                               type="text"
-                              
                               {...register("password", {
                                 required: "Password is required",
                               })}
@@ -208,7 +215,7 @@ const Signup = () => {
                               class="form-control"
                               {...register("confirmPassword", {
                                 required: "Password is required",
-                                validate: validatePasswordMatch
+                                validate: validatePasswordMatch,
                               })}
                             />
                             {errors.confirmPassword && (

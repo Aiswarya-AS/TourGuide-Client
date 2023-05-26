@@ -10,26 +10,33 @@ const ProfileUpdate = () => {
   const user_id = Cookies.get("user_id");
 
   const [user, setUser] = useState("");
-  console.log(user);
+  
   const navigate = useNavigate();
   const { register, setValue, handleSubmit } = useForm();
   useEffect(() => {
     axios
       .get(`${userProfilePost}/${user_id}`)
       .then((res) => {
-        setUser(res.data);
-
-        setValue("firstName", res.data.firstname);
-        setValue("lastName", res.data.lastname);
-        setValue("email", res.data.email);
-        setValue("phone", res.data.phone);
+        setUser(res.data.serdata);
+        
+        setValue("firstName", res.data.serdata.firstname);
+        setValue("lastName", res.data.serdata.lastname);
+        setValue("email", res.data.serdata.email);
+        setValue("phone", res.data.serdata.phone);
       });
   }, [user_id, setValue]);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append('firstName',data.firstName)
+    formData.append('lastName',data.lastName)
+    formData.append('email',data.email)
+    formData.append('phone',data.phone)
+    formData.append('image',data.image[0])
+
     axios
-      .put(`${"http://127.0.0.1:8000/user/userUpdate"}/${user_id}`, data, {
-        headers: { "Content-Type": "application/json" },
+      .put(`${"http://127.0.0.1:8000/user/userUpdate"}/${user_id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data"  },
       })
       .then((res) => {
         // setUser(res.data)
@@ -62,7 +69,7 @@ const ProfileUpdate = () => {
     <>
       <div class="card " style={{ width: "60rem", marginLeft: "18rem" }}>
         <div class="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form enctype="multipart/form-data"  onSubmit={handleSubmit(onSubmit)}>
             <div class="row mb-3">
               <div class="col-sm-3">
                 <h6 class="mb-0">First Name</h6>
@@ -125,7 +132,7 @@ const ProfileUpdate = () => {
                 <h6 class="mb-0">Profile Picture</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="file" class="form-control" name="image" />
+                <input type="file" class="form-control" name="image"{...register('image')} />
               </div>
             </div>
 

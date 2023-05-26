@@ -71,9 +71,12 @@ const BookingHistory = (props) => {
     <>
       {/* <div className='col-md-8 '> */}
       <div class="card ">
-        {historyData.map((h, index) => (
-          <Accordion>
-            <Accordion.Item eventKey="0" className="mt-3">
+
+
+      {historyData.length > 0 ? (
+  historyData.map((h, index) => (
+    <Accordion key={index}>
+      <Accordion.Item eventKey="0" className="mt-3">
               <Accordion.Header>
                 {h.location} - {h.date}{" "}
                 <div className="text-center mt-2 mx-5">
@@ -153,8 +156,14 @@ const BookingHistory = (props) => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
-        ))}
+    </Accordion>
+  ))
+) : (
+  <p className="text-center">Your order is empty....</p>
+)}
+
+
+        
       </div>
       {/* </div> */}
     </>

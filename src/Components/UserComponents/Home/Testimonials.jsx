@@ -10,40 +10,43 @@ export default function Testimonials() {
       <div className="testimonials">
         <div className="testimonial">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            asperiores eaque.
+          "I used the tour guide app during my recent vacation,
+           and it completely transformed my travel experience. 
+           Highly recommended!" 
           </p>
           <div className="info">
-            <img src={avatarImage} alt="" />
+            {/* <img src='' alt="" /> */}
             <div className="details">
-              <h4>Kishan Sheth</h4>
-              <span>CEO - Shashaan Web Solutions</span>
+              <h4>- Sarah D.</h4>
+              {/* <span>CEO - Shashaan Web Solutions</span> */}
             </div>
           </div>
         </div>
         <div className="testimonial">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            asperiores eaque.
+          I cannot thank the tour guide app enough for making my vacation unforgettable. 
+          The app's audio guides were exceptional,
+           providing captivating stories and historical insights as I
+            explored landmarks and attractions
           </p>
           <div className="info">
-            <img src={avatarImage} alt="" />
+            {/* <img src={avatarImage} alt="" /> */}
             <div className="details">
-              <h4>Kishan Sheth</h4>
-              <span>CEO - Shashaan Web Solutions</span>
+              <h4>-Emily S</h4>
+              {/* <span>CEO - Shashaan Web Solutions</span> */}
             </div>
           </div>
         </div>
         <div className="testimonial">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            asperiores eaque.
+          As a frequent traveler, I've tried numerous tour guide apps, but none compare to this one.
+           The user interface is intuitive and visually appealing, and the content is top-notch. 
           </p>
           <div className="info">
-            <img src={avatarImage} alt="" />
+            {/* <img src={avatarImage} alt="" /> */}
             <div className="details">
-              <h4>Kishan Sheth</h4>
-              <span>CEO - Shashaan Web Solutions</span>
+              <h4>- Marl L</h4>
+              {/* <span>CEO - Shashaan Web Solutions</span> */}
             </div>
           </div>
         </div>

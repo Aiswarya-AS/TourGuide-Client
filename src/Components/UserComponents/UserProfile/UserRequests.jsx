@@ -17,9 +17,12 @@ const UserRequests = (props) => {
     <>
       {/* <div className='col-md-8 '> */}
       <div class="card">
-        {requests.map((r, index) => (
-          <Accordion>
-            <Accordion.Item eventKey="0" className="mt-3">
+
+
+      {requests.length > 0 ? (
+  requests.map((r, index) => (
+    <Accordion key={index}>
+      <Accordion.Item eventKey="0" className="mt-3">
               <Accordion.Header>
                 Location &nbsp; Status:{r.status}
               </Accordion.Header>
@@ -56,8 +59,12 @@ const UserRequests = (props) => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
-        ))}
+    </Accordion>
+  ))
+) : (
+  <p className="text-center">No requests...</p>
+)}
+        
       </div>
       {/* </div> */}
     </>

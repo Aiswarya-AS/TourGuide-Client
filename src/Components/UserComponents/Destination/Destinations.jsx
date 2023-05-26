@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Destinations() {
     const location=useLocation()
-    console.log(location.state.data);
+    
     const navigate=useNavigate()
     const [destination]=useState(location.state.data)
     const [currentPage, setCurrentPage] = useState(1);

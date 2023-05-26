@@ -1,8 +1,9 @@
 import React, { useState  } from 'react'
 import './GSignup.css'
-import axios from 'axios';
+import axios from '../../../utilis/axios'
 import toast from 'react-hot-toast';
 import { guideSignUpPOst } from '../../../utilis/constants';
+import { Link } from 'react-router-dom';
 const GSignup = () => {
    
   const [first_name,setFirstName]=useState();
@@ -56,10 +57,10 @@ const GSignup = () => {
   }
   return (
     <>
-     <div class="container contact-form " style={{marginTop:"3rem"}}>
+     <div class="container contact-form border shadow p-2 " style={{marginTop:"3rem"}}>
         
             <form onSubmit={handleSubmit}>
-                <h3>Sign Up</h3>
+                <h3>TourWhiz Sign Up</h3>
                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -91,9 +92,16 @@ const GSignup = () => {
                         </div>
                       
                     </div>
-                    <div class="form-group  mt-3 w-25">
+                    {/* <div class="form-group  mt-3 w-25">
                             <input type="submit" name="btnSubmit" class="btnContact "  value="Sign Up" />
+                        </div> */}
+                        <div className='form-group text-center mt-2 small'>
+                        <input type="submit" name="btnSubmit" class="btnContact mt-2  "  value="Sign Up" />
                         </div>
+
+                        <div className='form-group text-center mt-2 small'>
+<Link to='/guide_login'>Login</Link>                        </div>
+
                 </div>
             </form>
 </div>

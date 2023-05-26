@@ -50,12 +50,12 @@ const GLogin = () => {
     }
     return (
       <>
-       <div class="container contact-form mb-5"style={{width:"40rem"}}>
+       <div class="container contact-form mb-5 border shadow p-2"style={{width:"40rem"}}>
               {/* <div class="contact-image">
                   <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
               </div> */}
               <form onSubmit={handleSubmit}>
-                  <h3>Login</h3>
+                  <h3>TourWhiz Login</h3>
                  <div class="row " >
                       <div class="col-md-12">
                         
@@ -72,6 +72,7 @@ const GLogin = () => {
                         <div className='form-group text-center mt-2'>
                                 <Link  to= '/guide_signup'className='text-decoration-none'>Register</Link>
                         </div>
+                       
                       </div>
                     
                   </div>
