@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../../../utilis/axios'
 import { useNavigate } from "react-router-dom";
 import "./GuideList.css";
+import { guideListGet } from "../../../utilis/constants";
 const GuideList = (props) => {
   const [guide, setGuide] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`${"http://127.0.0.1:8000/user/guides"}/${props.place}`, {
+      .get(`${guideListGet}/${props.place}`, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {

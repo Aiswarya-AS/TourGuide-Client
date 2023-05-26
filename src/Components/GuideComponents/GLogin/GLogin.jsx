@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+import axios from '../../../utilis/axios'
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import { guideLoginPOst } from '../../../utilis/constants';
 const GLogin = () => {
     
     const [email,setEmail]=useState();
@@ -18,7 +19,7 @@ const GLogin = () => {
        
         password
       })
-      axios.post('http://localhost:8000/guide/guide_login/',data,{
+      axios.post(guideLoginPOst,data,{
           headers:{"Content-Type": "application/json"},
       }).then((res)=>{
           

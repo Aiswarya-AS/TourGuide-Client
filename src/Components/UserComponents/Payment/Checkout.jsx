@@ -1,9 +1,10 @@
 // import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios';
+import axios from '../../../utilis/axios'
 import { useEffect, useState } from 'react';
 import { useCallback } from "react";
 import useRazorpay from "react-razorpay";
+import { orderRecapPost, paymentPost } from '../../../utilis/constants';
 const Checkout = () => {
     const Razorpay = useRazorpay();
     // const [checkoutData]=useState(location.state.data)
@@ -14,14 +15,14 @@ const Checkout = () => {
     const navigate = useNavigate()
     
     useEffect(()=>{
-        axios.get(`${'http://127.0.0.1:8000/user/order_recap'}/${parms.id}`).then((res)=>{
+        axios.get(`${orderRecapPost}/${parms.id}`).then((res)=>{
             setorderData(res.data)
             
         })
     },[parms.id])
 
     const booking=()=>{
-        axios.post('http://127.0.0.1:8000/user/payment',{data:{orderdata},amount:amount},{
+        axios.post(paymentPost,{data:{orderdata},amount:amount},{
             headers:{"Content-Type": "application/json"}
         }).then((res)=>{
             console.log(res.data);

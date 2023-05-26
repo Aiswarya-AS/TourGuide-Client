@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
+import axios from '../../../utilis/axios'
 import Cookies from "js-cookie";
 import UserRequests from "./UserRequests";
 import Profile from "./Profile";
 import BookingHistory from "./BookingHistory";
 import Navbar from "../Home/Navbar";
 import ProfileUpdate from "./ProfileUpdate";
+import { userProfilePost } from "../../../utilis/constants";
 const UserProfile = () => {
   const user_id = Cookies.get("user_id");
   const [user, setUser] = useState([]);
   const [walletBalance, setWalletBalance] = useState("");
   const user_deatails = () => {
     axios
-      .get(`${"http://127.0.0.1:8000/user/user_profile"}/${user_id}`)
+      .get(`${userProfilePost}/${user_id}`)
       .then((res) => {
         setUser(res.data.serdata);
         setWalletBalance(res.data.balance);

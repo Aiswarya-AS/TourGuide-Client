@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-import axios from "axios";
+import axios from '../../../utilis/axios'
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { userProfilePost } from "../../../utilis/constants";
 const ProfileUpdate = () => {
   const user_id = Cookies.get("user_id");
 
@@ -14,7 +15,7 @@ const ProfileUpdate = () => {
   const { register, setValue, handleSubmit } = useForm();
   useEffect(() => {
     axios
-      .get(`${"http://127.0.0.1:8000/user/user_profile"}/${user_id}`)
+      .get(`${userProfilePost}/${user_id}`)
       .then((res) => {
         setUser(res.data);
 

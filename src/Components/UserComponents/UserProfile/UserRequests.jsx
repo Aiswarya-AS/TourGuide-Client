@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import axios from "axios";
+import axios from '../../../utilis/axios'
 import { Link } from "react-router-dom";
+import { userRequestPost } from "../../../utilis/constants";
 const UserRequests = (props) => {
   const user_id = props.user_id;
   const [requests, setRequests] = useState([]);
   useEffect(() => {
     axios
-      .get(`${"http://127.0.0.1:8000/user/user_requests"}/${user_id}`)
+      .get(`${userRequestPost}/${user_id}`)
       .then((res) => {
         setRequests(res.data);
       });

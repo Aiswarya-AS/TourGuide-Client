@@ -4,15 +4,16 @@ import { GoRequestChanges } from "react-icons/go";
 import { BsClockHistory } from "react-icons/bs";
 import { FaBlog } from "react-icons/fa";
 import Cookies from "js-cookie";
-import axios from "axios";
+import axios from '../../../utilis/axios'
 import { Link } from "react-router-dom";
+import { userProfilePost } from "../../../utilis/constants";
 const ProfileCard = () => {
   const user_id = Cookies.get("user_id");
   const [user, setUser] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${"http://127.0.0.1:8000/user/user_profile"}/${user_id}`)
+      .get(`${userProfilePost}/${user_id}`)
       .then((res) => {
         setUser(res.data);
         console.log(res.data);

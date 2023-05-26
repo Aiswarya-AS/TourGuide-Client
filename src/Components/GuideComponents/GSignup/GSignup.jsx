@@ -2,6 +2,7 @@ import React, { useState  } from 'react'
 import './GSignup.css'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { guideSignUpPOst } from '../../../utilis/constants';
 const GSignup = () => {
    
   const [first_name,setFirstName]=useState();
@@ -26,7 +27,7 @@ const GSignup = () => {
       language,
       password
     })
-    axios.post('http://localhost:8000/guide/guide_signup/',data,{
+    axios.post(guideSignUpPOst,data,{
         headers:{"Content-Type": "application/json"},
     }).then((res)=>{
         
