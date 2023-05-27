@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import axios from '../../../utilis/axios'
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { userProfilePost } from "../../../utilis/constants";
+import { userProfilePost, userUpdatePost } from "../../../utilis/constants";
 const ProfileUpdate = () => {
   const user_id = Cookies.get("user_id");
 
@@ -35,7 +35,7 @@ const ProfileUpdate = () => {
     formData.append('image',data.image[0])
 
     axios
-      .put(`${"http://127.0.0.1:8000/user/userUpdate"}/${user_id}`, formData, {
+      .put(`${userUpdatePost}/${user_id}`, formData, {
         headers: { "Content-Type": "multipart/form-data"  },
       })
       .then((res) => {
