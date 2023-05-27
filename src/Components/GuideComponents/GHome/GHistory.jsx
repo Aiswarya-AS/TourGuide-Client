@@ -219,7 +219,7 @@ const GHistory = () => {
                               <b class="text-color-otp">+91 09899619282</b>
                             </span> */}
                             <div class="d-flex flex-row mt-5">
-                              {/* <input
+                              <input
                                 type="text"
                                  className="otp-input"
                                 class="form-control m-1"
@@ -227,9 +227,9 @@ const GHistory = () => {
                                 onChange={(e) => {
                                   setOtp(e.target.value);
                                 }}
-                              /> */}
+                              />
 
-                              <OtpInput
+                              {/* <OtpInput
                                 value={otp}
                                 onChange={setOtp}
                                 style={{
@@ -239,7 +239,7 @@ const GHistory = () => {
                                 numInputs={4}
                                 renderSeparator={<span>-</span>}
                                 renderInput={(props) => <input {...props} />}
-                              />
+                              /> */}
                             </div>
 
                             <div class="text-center mt-5">

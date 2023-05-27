@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:8000/";
+export const baseUrl = "https://api.tourwhiz.online/";
 
 // User Urls
 export const loginPost = 'user/user_login/'
